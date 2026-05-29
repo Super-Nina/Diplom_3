@@ -1,4 +1,56 @@
-package PACKAGE_NAME;
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
+import org.junit.Test;
 
-public class LoginTests {
-}
+import static org.junit.Assert.assertTrue;
+
+public class LoginTests extends BaseUITest {
+    @Test
+    @DisplayName("Вход через кнопку Войти в аккаунт")
+    @Description("Проверка, что можно войти через кнопку Войти в аккаунт на главной странице")
+    public void LoginButtonOnMainPageTest() {
+        steps.startOfWork();
+        mainPage.clickLoginButton();
+        steps.fillEmailAndPassword();
+
+        assertTrue("Кнопки 'Оформить заказ' не видно", dashboardPage.isCreateOrderButtonVisible());
+    }
+
+    @Test
+    @DisplayName("Вход через кнопку Личный кабинет")
+    @Description("Проверка, что можно войти через кнопку личный кабинет на главной странице")
+    public void ProfileButtonOnMainPage() {
+        steps.startOfWork();
+        mainPage.clickProfileButton();
+        steps.fillEmailAndPassword();
+
+        assertTrue("Кнопки 'Оформить заказ' не видно", dashboardPage.isCreateOrderButtonVisible());
+    }
+
+    @Test
+    @DisplayName("Вход через кнопку в форме регистрации")
+    @Description("Проверка, что можно войти через кнопку в форме регистрации")
+    public void registrationButtonLoginPageTest(){
+        steps.startOfWork();
+        mainPage.clickLoginButton();
+        loginPage.clickRegistrationButtonLoginPage();
+        registrationPage.clickLoginButtonRegistrationPage();
+        steps.fillEmailAndPassword();
+
+        assertTrue("Кнопки 'Оформить заказ' не видно", dashboardPage.isCreateOrderButtonVisible());
+    }
+
+    @Test
+    @DisplayName("Вход через кнопку в форме восстановления пароля")
+    @Description("Проверка, что можно войти через кнопку в форме восстановления пароля")
+    public void  loginViaPasswordRecoveryButtonTest(){
+        steps.startOfWork();
+        mainPage.clickLoginButton();
+        loginPage.clickPasswordRecoveryButton();
+        passwordRecoveryPage.clickLoginLinkPasswordRecoveryPage();
+        steps.fillEmailAndPassword();
+
+        assertTrue("Кнопки 'Оформить заказ' не видно", dashboardPage.isCreateOrderButtonVisible());
+    }
+    }
+

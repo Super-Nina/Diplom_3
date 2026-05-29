@@ -1,11 +1,10 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class СonstructorTests extends BaseUITest{
+public class ConstructorTests extends BaseUITest{
 
     @Test
 @DisplayName("Проверка работы раздела Конструктор: переход в Булки")

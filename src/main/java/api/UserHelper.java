@@ -4,6 +4,8 @@ import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import com.github.javafaker.Faker;
+import org.apache.http.HttpStatus;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +33,7 @@ public class UserHelper {
                 .body(requestBody)
                 .post("/api/auth/register")
                 .then()
-                .statusCode(200) // 🌟 КРИТИЧЕСКАЯ ПРОВЕРКА: Тест упадет здесь, если код не 200
+                .statusCode(HttpStatus.SC_OK) // 🌟 КРИТИЧЕСКАЯ ПРОВЕРКА: Тест упадет здесь, если код не 200
                 .extract()
                 .path("accessToken");
 
@@ -56,7 +58,7 @@ public class UserHelper {
                 .when()
                 .delete("/api/auth/user")
                 .then()
-                .statusCode(202); // проверка успешного удаления Пользователя
+                .statusCode(HttpStatus.SC_ACCEPTED); // проверка успешного удаления Пользователя
     }
 }
 

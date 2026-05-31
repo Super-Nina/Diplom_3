@@ -1,10 +1,23 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
 public class LoginTests extends BaseUITest {
+
+    @Before
+    public void setUpUser() {
+            steps.createTestUserViaApi();
+        }
+
+    @After
+    public void tearDownUser() {
+        steps.deleteTestUserViaApi();
+    }
+
     @Test
     @DisplayName("Вход через кнопку Войти в аккаунт")
     @Description("Проверка, что можно войти через кнопку Войти в аккаунт на главной странице")

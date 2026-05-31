@@ -44,24 +44,18 @@ private By loginButtonRegistrationPage = By.xpath(".//a[text()='Войти']");
     }
 
     @Step("Заполняем поле Имя")
-    public void setNameFieldForRegistration(){
-        driver.findElement(nameFieldForRegistration).sendKeys("Nina");
+    public void setNameFieldForRegistration(String name){
+        driver.findElement(nameFieldForRegistration).sendKeys(name);
     }
 
     @Step("Заполняем поле Email")
-    public void setEmailFieldForRegistration(){
-        String email = "Nina" + System.currentTimeMillis() + "@test.com";
+    public void setEmailFieldForRegistration(String email){
         driver.findElement(emailFieldForRegistration).sendKeys(email);
     }
 
     @Step("Заполняем поле Пароль")
-    public void setPasswordFieldForRegistration(){
-        driver.findElement(passwordFieldForRegistration).sendKeys("1234567");
-    }
-
-    @Step("Заполняем поле Пароль коротким паролем")
-    public void setShortPasswordFieldForRegistration(){
-        driver.findElement(passwordFieldForRegistration).sendKeys("1234");
+    public void setPasswordFieldForRegistration(String password){
+        driver.findElement(passwordFieldForRegistration).sendKeys(password);
     }
 
     @Step("Нажимаем кнопку Зарегистрироваться")

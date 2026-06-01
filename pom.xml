@@ -35,6 +35,14 @@
             <version>${allure.version}</version>
         </dependency>
 
+        <!--  Lombok библиотека для упрощения работы с геттерами, сеттерами и т.д.  -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Логирование (нужно для WebDriverManager) -->
         <dependency>
             <groupId>ch.qos.logback</groupId>

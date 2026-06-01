@@ -1,3 +1,4 @@
+import api.UserHelper;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
@@ -9,7 +10,7 @@ public class RegistrationTests extends BaseUITest{
 //    Удаление пользователя, созданного через API
     @After
     public void tearDownUser() {
-        steps.deleteUiCreatedUserViaApi();
+        UserHelper.deleteUiCreatedUser(steps.getRegistrationData());
     }
 
     @Test

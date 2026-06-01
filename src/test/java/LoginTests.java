@@ -1,5 +1,7 @@
+import api.UserHelper;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import model.TestUserData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,15 +9,18 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 public class LoginTests extends BaseUITest {
+    private TestUserData testUser;
 
     @Before
     public void setUpUser() {
-            steps.createTestUserViaApi();
+        testUser = UserHelper.createUserAndGetToken();
         }
 
     @After
     public void tearDownUser() {
-        steps.deleteTestUserViaApi();
+        if (testUser != null && testUser.getAccessToken() != null) {
+            UserHelper.deleteUser(testUser.getAccessToken());
+        }
     }
 
     @Test
@@ -24,7 +29,7 @@ public class LoginTests extends BaseUITest {
     public void LoginButtonOnMainPageTest() {
         steps.startOfWork();
         mainPage.clickLoginButton();
-        steps.fillEmailAndPassword();
+        steps.fillEmailAndPassword(testUser);
 
         assertTrue("Кнопки 'Оформить заказ' не видно", dashboardPage.isCreateOrderButtonVisible());
     }
@@ -35,7 +40,7 @@ public class LoginTests extends BaseUITest {
     public void ProfileButtonOnMainPage() {
         steps.startOfWork();
         mainPage.clickProfileButton();
-        steps.fillEmailAndPassword();
+        steps.fillEmailAndPassword(testUser);
 
         assertTrue("Кнопки 'Оформить заказ' не видно", dashboardPage.isCreateOrderButtonVisible());
     }
@@ -48,7 +53,7 @@ public class LoginTests extends BaseUITest {
         mainPage.clickLoginButton();
         loginPage.clickRegistrationButtonLoginPage();
         registrationPage.clickLoginButtonRegistrationPage();
-        steps.fillEmailAndPassword();
+        steps.fillEmailAndPassword(testUser);
 
         assertTrue("Кнопки 'Оформить заказ' не видно", dashboardPage.isCreateOrderButtonVisible());
     }
@@ -61,7 +66,7 @@ public class LoginTests extends BaseUITest {
         mainPage.clickLoginButton();
         loginPage.clickPasswordRecoveryButton();
         passwordRecoveryPage.clickLoginLinkPasswordRecoveryPage();
-        steps.fillEmailAndPassword();
+        steps.fillEmailAndPassword(testUser);
 
         assertTrue("Кнопки 'Оформить заказ' не видно", dashboardPage.isCreateOrderButtonVisible());
     }
